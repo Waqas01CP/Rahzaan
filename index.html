@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rahzaan · Academic career guidance for Karachi students</title>
+<meta name="description" content="A career-guidance system for Karachi secondary students that reasons about real admission eligibility and says so when it does not know. Case study by Muhammad Waqas Sharif.">
+<meta name="author" content="Muhammad Waqas Sharif">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Rahzaan · Academic career guidance for Karachi students">
+<meta property="og:description" content="A system that reasons about real admission eligibility, and says so when it does not know.">
+<meta property="og:image" content="https://waqas01cp.github.io/rahzaan/assets/og-card.png">
+<meta property="og:url" content="https://waqas01cp.github.io/rahzaan/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%233D5AFE'/><text x='16' y='23' font-family='Inter,sans-serif' font-size='19' font-weight='700' fill='%23FFFFFF' text-anchor='middle'>R</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* pulled from FRONTEND_DESIGN_SYSTEM_V2 */
+  --indigo:#3D5AFE;        /* primary, human actions */
+  --indigo-lo:#536DFE;     /* gradient partner */
+  --indigo-soft:#7986CB;   /* secondary text, metadata */
+  --indigo-pale:#BBCCFF;   /* on-indigo secondary text */
+  --violet:#7C4DFF;        /* AI CONTENT ONLY */
+  --violet-bg:#EDE7F6;
+  --violet-label:#6200EA;
+  --violet-body:#1A0050;
+  --bg:#F8F9FF;            /* 60% surface */
+  --surface:#FFFFFF;
+  --ink:#141A3D;
+  --body:#4A5478;
+  --warn-bg:#FFF8E1;
+  --warn-border:#F59E0B;
+  --warn-text:#78350F;
+  --shadow-card:0 8px 24px rgba(61,90,254,.08);
+  --shadow-form:0 12px 40px rgba(61,90,254,.06);
+  --r-btn:12px; --r-card:16px; --r-form:32px;
+  --max:1100px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{background:var(--bg);color:var(--ink);font-family:Inter,system-ui,sans-serif;font-size:17px;line-height:1.62;-webkit-font-smoothing:antialiased}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 28px}
+a{color:var(--indigo);text-decoration:none}
+a:hover{text-decoration:underline}
+a:focus-visible,button:focus-visible{outline:2px solid var(--indigo);outline-offset:3px;border-radius:4px}
+h1,h2,h3{font-weight:700;letter-spacing:-.021em;line-height:1.14}
+.mono{font-family:"IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums}
+.eyebrow{font-size:11.5px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--indigo)}
+
+/* hero mirrors the app splash */
+header{background:var(--indigo);color:#fff;padding:74px 0 0;position:relative}
+header::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:linear-gradient(90deg,var(--indigo),var(--indigo-lo))}
+.mark{font-size:12.5px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--indigo-pale)}
+h1{font-size:clamp(36px,5.8vw,62px);font-weight:800;margin:20px 0 0;letter-spacing:-.03em}
+.gloss{font-size:14px;color:var(--indigo-pale);margin-top:14px}
+.lede{max-width:640px;margin-top:24px;color:#E4EAFF;font-size:18.5px}
+.links{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px}
+.links a{font-size:14.5px;font-weight:600;color:#fff;background:rgba(255,255,255,.14);padding:11px 18px;border-radius:var(--r-btn)}
+.links a:hover{background:rgba(255,255,255,.24);text-decoration:none}
+.links a.primary{background:#fff;color:var(--indigo)}
+.links a.primary:hover{background:#EEF1FF}
+
+/* signature: the merit sheet */
+.sheet{margin-top:52px;background:var(--surface);color:var(--ink);border-radius:var(--r-form) var(--r-form) 0 0;padding:28px 28px 32px;box-shadow:var(--shadow-form);overflow-x:auto}
+.cap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:18px;font-size:11.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--indigo-soft)}
+table{width:100%;border-collapse:collapse;font-size:14.5px;min-width:560px}
+th{text-align:left;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--indigo-soft);padding:0 14px 10px 0}
+td{padding:13px 14px 13px 0;background:var(--bg);vertical-align:middle}
+tbody tr td:first-child{border-radius:var(--r-btn) 0 0 var(--r-btn);padding-left:14px}
+tbody tr td:last-child{border-radius:0 var(--r-btn) var(--r-btn) 0}
+tbody tr+tr td{box-shadow:0 -6px 0 var(--surface)}
+.tag{display:inline-block;font-size:11.5px;font-weight:700;padding:3px 9px;border-radius:20px}
+.tag.ok{background:#E4E9FF;color:var(--indigo)}
+.tag.no{background:#EEF0F6;color:var(--indigo-soft)}
+.null{color:var(--warn-text);font-weight:600}
+.readout{margin-top:20px;padding:16px 18px;background:var(--warn-bg);border-left:3px solid var(--warn-border);border-radius:0 8px 8px 0;font-size:15px;color:var(--warn-text)}
+
+section{padding:76px 0}
+section+section{border-top:1px solid #E6E9F7}
+h2{font-size:clamp(25px,3.3vw,34px);margin:12px 0 22px;max-width:21ch}
+p{color:var(--body);max-width:74ch;margin-bottom:16px}
+p strong{color:var(--ink);font-weight:600}
+.grid{display:grid;gap:18px;margin-top:28px}
+@media(min-width:760px){.g2{grid-template-columns:1fr 1fr}}
+.cell{background:var(--surface);padding:24px;border-radius:var(--r-card);box-shadow:var(--shadow-card)}
+.cell h3{font-size:16.5px;margin-bottom:9px}
+.cell p{font-size:15px;margin:0}
+
+.dec{background:var(--surface);border-radius:var(--r-card);box-shadow:var(--shadow-card);padding:24px;margin-top:18px;display:grid;gap:4px}
+@media(min-width:860px){.dec{grid-template-columns:52px 1fr;gap:0 18px}}
+.dec .n{font-size:13px;font-weight:700;color:var(--indigo);padding-top:4px}
+.dec h3{font-size:18.5px;margin-bottom:8px}
+.dec .was{margin-top:13px;padding:12px 16px;background:var(--bg);border-radius:10px;font-size:14.5px;color:var(--body)}
+.dec .was span{font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--indigo-soft);display:block;margin-bottom:4px}
+
+.ev{display:grid;gap:18px;margin-top:28px}
+@media(min-width:700px){.ev{grid-template-columns:1fr 1fr}}
+.ev .row{background:var(--surface);padding:22px 24px;border-radius:var(--r-card);box-shadow:var(--shadow-card);display:flex;gap:18px;align-items:baseline}
+.ev .v{font-size:23px;font-weight:700;color:var(--indigo);white-space:nowrap}
+.ev .l{font-size:14.5px;color:var(--body);line-height:1.45}
+
+.shots{display:grid;gap:20px;margin-top:28px}
+@media(min-width:760px){.shots{grid-template-columns:repeat(auto-fit,minmax(190px,1fr))}}
+figure{margin:0}
+.ph{aspect-ratio:9/17;background:var(--surface);border-radius:var(--r-card);box-shadow:var(--shadow-card);display:flex;align-items:center;justify-content:center;text-align:center;padding:20px;font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--indigo-soft);line-height:1.6}
+img.ph{display:block;width:100%;height:auto;aspect-ratio:9/17;object-fit:cover;object-position:top;padding:0}
+figcaption{font-size:14px;color:var(--body);margin-top:11px}
+
+/* engineering log */
+.log{margin-top:26px}
+.entry{background:var(--surface);border-radius:var(--r-card);box-shadow:var(--shadow-card);padding:20px 24px;margin-bottom:14px;display:grid;gap:4px}
+@media(min-width:820px){.entry{grid-template-columns:112px 1fr;gap:0 22px}}
+.entry .when{font-family:"IBM Plex Mono",monospace;font-size:12.5px;font-weight:500;color:var(--indigo-soft);padding-top:4px;font-variant-numeric:tabular-nums}
+.entry h3{font-size:16.5px;margin-bottom:7px}
+.entry p{font-size:14.5px;margin:0;max-width:none}
+.entry .fix{margin-top:11px;padding-left:14px;border-left:2px solid var(--indigo);font-size:14.5px;color:var(--body)}
+.entry .fix b{color:var(--ink);font-weight:600}
+.entry.open{background:var(--warn-bg)}
+.entry.open .when{color:var(--warn-border)}
+.entry.open h3,.entry.open p{color:var(--warn-text)}
+.logtitle{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin:34px 0 14px}
+.logtitle h3{font-size:18px}
+.logtitle .note{font-size:14px;color:var(--indigo-soft)}
+
+.lim{background:var(--surface);border-radius:var(--r-card);box-shadow:var(--shadow-card);border-left:3px solid var(--warn-border);padding:20px 24px;margin-top:16px}
+.lim h3{font-size:17px;margin-bottom:7px}
+.lim p{font-size:15.5px;margin:0}
+
+/* AI-content panel: violet is reserved for this and nothing else */
+.ai{background:var(--violet-bg);border-left:3px solid var(--violet);border-radius:0 12px 12px 0;padding:18px 20px;margin-top:26px}
+.ai .l{font-size:10.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--violet-label);margin-bottom:6px}
+.ai p{font-size:14.5px;color:var(--violet-body);margin:0}
+
+footer{background:var(--ink);color:#A9B2D8;padding:56px 0 46px;font-size:14.5px;margin-top:34px}
+footer .who{color:#fff;font-size:17px;font-weight:600;margin-bottom:8px}
+footer p{color:#A9B2D8;max-width:72ch}
+footer a{color:#B9C6FF}
+.scale{display:grid;gap:1px;background:#DDE3FB;border-radius:var(--r-card);overflow:hidden;margin-top:26px;box-shadow:var(--shadow-card)}
+@media(min-width:560px){.scale{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:860px){.scale{grid-template-columns:repeat(4,1fr)}}
+.scale div{background:var(--surface);padding:18px 20px}
+.scale .n{font-size:25px;font-weight:700;color:var(--indigo);line-height:1.1}
+.scale .k{font-size:13.5px;color:var(--body);margin-top:5px}
+.fig{background:var(--surface);border-radius:var(--r-card);box-shadow:var(--shadow-card);padding:26px 24px 20px;margin-top:26px}
+.fig svg{width:100%;height:auto;display:block}
+.fig .cap{display:block;margin-top:16px;font-size:14px;color:var(--body);text-transform:none;letter-spacing:0;font-weight:400}
+.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);background:var(--ink);color:#fff;
+  font-size:14.5px;font-weight:500;padding:12px 20px;border-radius:var(--r-btn);
+  box-shadow:0 8px 24px rgba(20,26,61,.28);z-index:99}
+.toast[hidden]{display:none}
+.fine{margin-top:26px;padding-top:20px;border-top:1px solid #2B3260;font-size:12.5px;color:#7E88B4}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="mark">Rahzaan</div>
+    <h1>It tells a student<br>when it does not know.</h1>
+    <div class="gloss">rah (path) + zaan (one who knows)</div>
+    <p class="lede">An academic career-guidance system for Karachi secondary students. It reasons about
+      which degrees a student can genuinely enter, how competitive they would be, and where the honest
+      answer is that the data does not exist.</p>
+    <nav class="links">
+      <a class="primary" href="https://fyp-career-guidance.vercel.app/">Open the live app</a>
+      <a href="#log">Engineering log</a>
+      <a href="https://www.linkedin.com/in/ma-waqas-sharif/">LinkedIn</a>
+      <a href="mailto:ma.sharif.waqas@gmail.com" title="ma.sharif.waqas@gmail.com">Email</a>
+      <a href="https://github.com/Waqas01CP">GitHub</a>
+    </nav>
+
+    <div class="sheet">
+      <div class="cap"><span>Merit standing, sample output</span><span>Catalogue as of July 2026</span></div>
+      <table>
+        <thead><tr><th>Degree</th><th>Eligible</th><th>Closing merit</th><th>Standing</th></tr></thead>
+        <tbody>
+          <tr><td>Programme A</td><td><span class="tag ok">Yes</span></td><td class="mono">76.4%</td><td>Strong fit</td></tr>
+          <tr><td>Programme B</td><td><span class="tag ok">Yes</span></td><td class="mono">81.2%</td><td>Reach</td></tr>
+          <tr><td>Programme C</td><td><span class="tag no">No</span></td><td class="mono">68.0%</td><td>Subject not held</td></tr>
+          <tr><td>Programme D</td><td><span class="tag ok">Yes</span></td><td class="null">not published</td><td class="null">confirm with the university</td></tr>
+        </tbody>
+      </table>
+      <p class="readout">Row four is the reason this project exists. Many universities never publish a
+        closing merit. The system leaves that cell empty and says so, rather than filling it with a
+        plausible number a student would act on.</p>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">The problem</div>
+    <h2>Two requirements that pull against each other</h2>
+    <p>A student in Karachi choosing a degree is making one of the least reversible decisions of their
+      life, usually with no access to professional counselling. The hard part is not recommendation. It
+      is reasoning truthfully about eligibility across multiple examination boards, five academic
+      streams, equivalence rules for international qualifications, professional gating from three
+      separate regulatory councils, and merit mechanics that differ per university and are often not
+      published at all.</p>
+    <div class="grid g2">
+      <div class="cell"><h3>Fair to every stream, or limited by the data</h3>
+        <p>The admission data is richest for exactly the students who already have the most options.
+          Building only where the data is good means building only for them.</p></div>
+      <div class="cell"><h3>Helpful, or honest</h3>
+        <p>Showing a student more possibilities is helpful right up to the moment one of them is a
+          degree a regulator will never let them enter.</p></div>
+    </div>
+    <p style="margin-top:26px">Every significant decision in this system resolves one of those two
+      tensions.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">The approach</div>
+    <h2>Decisions in code. Language only to explain them.</h2>
+    <p>Eligibility, competitiveness, and ranking are computed in plain deterministic code with no model
+      in the loop. The language model receives what was already decided and explains it to the student.
+      A wrong recommendation is therefore a bug with a line number, not a prompt that behaved
+      differently on a Tuesday.</p>
+    <p>It also bounds the blast radius of the least trustworthy inputs. <strong>The most-validated
+      signals drive the ranking. The softer, less-validated ones shape only how the result is worded,
+      and cannot override it.</strong> The worst case for the weakest input is awkward phrasing, not a
+      wrong degree.</p>
+    <div class="fig">
+      <svg viewBox="0 0 860 300" role="img" aria-label="Control flow: a deterministic engine decides, and a language model only explains the decision">
+        <defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M0 0 L10 5 L0 10 z" fill="#7986CB"/></marker></defs>
+        <rect x="8" y="118" width="132" height="62" rx="12" fill="#E4E9FF"/>
+        <text x="74" y="145" text-anchor="middle" font-size="14" font-weight="600" fill="#3D5AFE">Student</text>
+        <text x="74" y="164" text-anchor="middle" font-size="12" fill="#4A5478">marks, subjects,</text>
+        <rect x="196" y="40" width="330" height="218" rx="16" fill="#F8F9FF" stroke="#D7DDFB"/>
+        <text x="212" y="66" font-size="11" font-weight="700" letter-spacing="1.4" fill="#3D5AFE">DETERMINISTIC ENGINE</text>
+        <rect x="212" y="80" width="298" height="42" rx="10" fill="#FFFFFF" stroke="#E2E7FC"/>
+        <text x="228" y="106" font-size="13.5" fill="#141A3D">Rules applied to what the student holds</text>
+        <rect x="212" y="130" width="142" height="56" rx="10" fill="#FFFFFF" stroke="#E2E7FC"/>
+        <text x="283" y="153" text-anchor="middle" font-size="13" fill="#141A3D">Independent</text>
+        <text x="283" y="171" text-anchor="middle" font-size="13" fill="#141A3D">steps, parallel</text>
+        <rect x="368" y="130" width="142" height="56" rx="10" fill="#FFFFFF" stroke="#E2E7FC"/>
+        <text x="439" y="153" text-anchor="middle" font-size="13" fill="#141A3D">Joined into</text>
+        <text x="439" y="171" text-anchor="middle" font-size="13" fill="#141A3D">one ranked set</text>
+        <rect x="212" y="196" width="298" height="40" rx="10" fill="#FFF8E1"/>
+        <rect x="212" y="196" width="3" height="40" fill="#F59E0B"/>
+        <text x="228" y="221" font-size="13" fill="#78350F">Unknown stays unknown. Nothing is invented.</text>
+        <rect x="582" y="88" width="270" height="122" rx="16" fill="#EDE7F6"/>
+        <rect x="582" y="88" width="3" height="122" fill="#7C4DFF"/>
+        <text x="600" y="115" font-size="11" font-weight="700" letter-spacing="1.4" fill="#6200EA">EXPLANATION LAYER</text>
+        <text x="600" y="142" font-size="13.5" fill="#1A0050">Receives the decision.</text>
+        <text x="600" y="162" font-size="13.5" fill="#1A0050">Explains it to the student.</text>
+        <text x="600" y="188" font-size="13" font-weight="600" fill="#6200EA">Never decides anything.</text>
+        <line x1="144" y1="149" x2="190" y2="149" stroke="#7986CB" stroke-width="2" marker-end="url(#a)"/>
+        <line x1="530" y1="149" x2="576" y2="149" stroke="#7986CB" stroke-width="2" marker-end="url(#a)"/>
+        <path d="M717 214 L717 268 L74 268 L74 186" fill="none" stroke="#7986CB" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#a)"/>
+        <text x="396" y="286" text-anchor="middle" font-size="12" fill="#7986CB">explanation returns to the student, streamed as it is produced</text>
+      </svg>
+      <span class="cap">The model sits downstream of every decision. There is no path by which it can change a ranking.</span>
+    </div>
+    <div class="ai">
+      <div class="l">Where the model is used</div>
+      <p>The conversational layer explains what the engine decided, answers follow-up questions about
+        cost and prospects, and adapts to how each student writes, including Roman Urdu and mixed
+        script. It never decides eligibility, competitiveness, or rank.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Design decisions</div>
+    <h2>Five corrections, and what each one replaced</h2>
+    <p>None of these were designed on a whiteboard. Each replaced something already running and already
+      wrong.</p>
+
+    <div class="dec"><div class="n">01</div><div>
+      <h3>Gate cross-stream eligibility on the subject actually held</h3>
+      <p>Eligibility follows the foundational subject a student studied, read against the governing
+        regulations, rather than being inferred from how capable they appear.</p>
+      <div class="was"><span>It replaced</span>An approach that inferred eligibility from assessed
+        capability, and could present a professionally gated medical degree as reachable to a student
+        no regulator would admit.</div></div></div>
+
+    <div class="dec"><div class="n">02</div><div>
+      <h3>Treat an unpublished cutoff as a state, not a missing number</h3>
+      <p>Degrees with no published closing merit carry an explicit state saying so, and point the
+        student at the admissions office. Cutoffs are derived from official merit lists or left empty.</p>
+      <div class="was"><span>It replaced</span>A silent default into a middle competitiveness band,
+        which meant the system was manufacturing an assessment and presenting it as a judgement.</div></div></div>
+
+    <div class="dec"><div class="n">03</div><div>
+      <h3>Assess students on the curriculum they actually studied</h3>
+      <p>Assessment is driven by the intersection of what a student studied and what their reachable
+        degrees actually test.</p>
+      <div class="was"><span>It replaced</span>A science-keyed battery that measured commerce and
+        humanities students on material they had never been taught, then proxied their merit from it.</div></div></div>
+
+    <div class="dec"><div class="n">04</div><div>
+      <h3>Never apply a rule retroactively</h3>
+      <p>Pass thresholds change over time. A student who passed under an older rule is never re-judged
+        against a newer one.</p>
+      <div class="was"><span>It replaced</span>Nothing visible. It would have quietly harmed a small
+        number of real students, and nobody would have noticed.</div></div></div>
+
+    <div class="dec"><div class="n">05</div><div>
+      <h3>Show reach options deliberately</h3>
+      <p>The ranked set always includes a guaranteed minimum of aspirational targets that sit above the
+        student's current standing but are genuinely eligible.</p>
+      <div class="was"><span>It replaced</span>A list of safe options only, which is its own kind of
+        dishonesty.</div></div></div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Systems</div>
+    <h2>A static graph, not a chain of calls</h2>
+    <p>The reasoning engine is a directed graph of independent steps rather than a sequence of prompts.
+      Steps that do not depend on each other execute concurrently, so the work that can overlap does.</p>
+    <div class="scale">
+      <div><div class="n">26</div><div class="k">reasoning steps: 24 inside the graph, 2 running after the response has streamed</div></div>
+      <div><div class="n">52</div><div class="k">fields in the typed state object threaded through every step</div></div>
+      <div><div class="n">22</div><div class="k">API endpoints over 6 database tables</div></div>
+      <div><div class="n">29</div><div class="k">routes in the app, across a single Android and web codebase</div></div>
+      <div><div class="n">7</div><div class="k">psychometric instruments, 265 items presented per session</div></div>
+      <div><div class="n">1,409</div><div class="k">items in the assessment banks the session draws from</div></div>
+      <div><div class="n">14,595</div><div class="k">job titles mapped to canonical fields by the labour-market pipeline</div></div>
+      <div><div class="n">592</div><div class="k">automated tests, zero failing</div></div>
+    </div>
+    <div class="grid g2">
+      <div class="cell"><h3>It cannot deadlock, by construction</h3>
+        <p>Every step runs on every turn and there are no conditional edges. An activation pass makes
+          irrelevant steps no-op instead of removing them from the graph, so every join is always
+          satisfied. A stalled turn caused by an unmet dependency is not a bug that was fixed. It is a
+          state the graph cannot enter.</p></div>
+      <div class="cell"><h3>One typed state object, threaded end to end</h3>
+        <p>Every step reads and writes a single typed structure rather than passing loose dictionaries.
+          No step can invent a field another step expects, and a shape change surfaces at the boundary
+          instead of three steps downstream as a silent default.</p></div>
+      <div class="cell"><h3>Streaming that survives the infrastructure</h3>
+        <p>Responses stream incrementally so the student sees reasoning as it arrives. Under live
+          conditions on the deployed service, a turn held 106.3 seconds past a 30-second proxy timeout
+          without dropping the connection, verified against the production deployment rather than a
+          local run.</p></div>
+      <div class="cell"><h3>Adding a university requires no code</h3>
+        <p>Eligibility logic is written against a schema, not against institutions. A new university
+          inherits every gate, filter, and merit rule the moment its data conforms. The tradeoff is
+          recorded honestly: the logic is schema-dependent, so a missing field silently widens
+          eligibility rather than failing loudly, which is a known hazard rather than a solved one.</p></div>
+      <div class="cell"><h3>Changes must leave existing output byte-identical</h3>
+        <p>Any change that is not meant to alter what students see is verified to produce identical
+          output for existing profiles. Improvements are additive by default, and a restructure has to
+          be argued for rather than assumed.</p></div>
+      <div class="cell"><h3>A five-stage labour-market pipeline</h3>
+        <p>Collection, daily refresh, classification, aggregation, and orchestration, each a separate
+          stage with atomic writes and resumable progress. The source would not expose one attribute
+          directly, so the collector recovers it through multiple filtered passes cross-referenced by
+          record id. 14,595 titles were mapped to canonical fields and aggregated across 51 of them,
+          with the records it skipped and the fields that received nothing both recorded rather than
+          quietly dropped.</p></div>
+      <div class="cell"><h3>The model is a swappable component</h3>
+        <p>Prompts are written so that anything working on the weakest supported model works unchanged
+          on a stronger one. Changing which model runs a given step is a configuration edit, not a
+          rewrite, which is what made it possible to develop against one provider and deploy on
+          another.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Engineering</div>
+    <h2>A check that cannot fail is worse than no check</h2>
+    <p>A guard that never fires is indistinguishable from a guard that does not exist, and worse,
+      because you now trust something that is not working. This principle shaped more of the system than
+      any feature did.</p>
+    <div class="grid g2">
+      <div class="cell"><h3>Guards are tested against the case built to defeat them</h3>
+        <p>One gate strips claims the system has no measurement to support. To prove the gate was doing
+          the work rather than a neighbouring check, it was fed a plausible, carefully hedged sentence
+          that passed every other quality criterion. Stripped when unsupported, preserved when
+          supported. A controlled experiment, not an assumption.</p></div>
+      <div class="cell"><h3>Honesty is enforced after generation, never requested before it</h3>
+        <p>Instructing a model not to do something failed across three separate live incidents. Rules of
+          the form "never assert what was not measured" are enforced deterministically in code once the
+          model has already spoken.</p></div>
+      <div class="cell"><h3>Documentation is generated from source and refuses to guess</h3>
+        <p>The internal architecture reference is built by reading the running system. Where the source
+          records nothing it prints a refusal rather than a plausible sentence, and it displays its own
+          age, because an earlier version once looked confidently current while sitting 151 commits
+          behind.</p></div>
+      <div class="cell"><h3>Every non-trivial algorithm has a written specification</h3>
+        <p>Not a comment. Purpose, fully typed inputs and outputs, formal step-numbered pseudocode
+          rather than a paste of the code, complexity, all three classes of invariant, enumerated edge
+          cases, and the alternatives rejected with the reason. Written only after the component is
+          complete, because a document written mid-implementation records the design you started with
+          and then misleads with authority.</p></div>
+      <div class="cell"><h3>Passing tests are treated as claims, not proof</h3>
+        <p>An audit of the boundary between app and service found five real defects that 209 passing
+          tests had missed, because every fixture seeded the canonical values the code expected and
+          never the payload the live app actually sends.</p></div>
+    </div>
+    <div class="fig">
+      <svg viewBox="0 0 860 250" role="img" aria-label="Honesty rules are enforced after generation in code, not requested inside the prompt">
+        <defs><marker id="b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M0 0 L10 5 L0 10 z" fill="#7986CB"/></marker></defs>
+        <text x="8" y="24" font-size="11" font-weight="700" letter-spacing="1.4" fill="#78350F">WHAT DID NOT WORK</text>
+        <rect x="8" y="36" width="360" height="52" rx="10" fill="#FFF8E1"/>
+        <rect x="8" y="36" width="3" height="52" fill="#F59E0B"/>
+        <text x="26" y="60" font-size="13.5" fill="#78350F">Telling the model, inside the prompt,</text>
+        <text x="26" y="78" font-size="13.5" font-weight="600" fill="#78350F">"never state what you did not measure"</text>
+        <text x="392" y="68" font-size="13" fill="#78350F">failed three times, live</text>
+        <text x="8" y="128" font-size="11" font-weight="700" letter-spacing="1.4" fill="#3D5AFE">WHAT WORKS</text>
+        <rect x="8" y="140" width="176" height="58" rx="10" fill="#EDE7F6"/>
+        <rect x="8" y="140" width="3" height="58" fill="#7C4DFF"/>
+        <text x="26" y="165" font-size="13" fill="#1A0050">Model writes freely</text>
+        <text x="26" y="184" font-size="13" fill="#1A0050">with no such rule</text>
+        <rect x="228" y="140" width="200" height="58" rx="10" fill="#FFFFFF" stroke="#D7DDFB"/>
+        <text x="246" y="165" font-size="13" fill="#141A3D">Code checks each claim</text>
+        <text x="246" y="184" font-size="13" fill="#141A3D">against what was measured</text>
+        <rect x="472" y="128" width="176" height="38" rx="10" fill="#E4E9FF"/>
+        <text x="490" y="152" font-size="13" fill="#3D5AFE">Measured: kept</text>
+        <rect x="472" y="172" width="176" height="38" rx="10" fill="#FFF8E1"/>
+        <text x="490" y="196" font-size="13" fill="#78350F">Not measured: removed</text>
+        <rect x="692" y="140" width="160" height="58" rx="10" fill="#F8F9FF" stroke="#D7DDFB"/>
+        <text x="772" y="165" text-anchor="middle" font-size="13" fill="#141A3D">What the student</text>
+        <text x="772" y="184" text-anchor="middle" font-size="13" fill="#141A3D">actually reads</text>
+        <line x1="188" y1="169" x2="222" y2="169" stroke="#7986CB" stroke-width="2" marker-end="url(#b)"/>
+        <line x1="432" y1="169" x2="466" y2="147" stroke="#7986CB" stroke-width="2" marker-end="url(#b)"/>
+        <line x1="432" y1="169" x2="466" y2="191" stroke="#7986CB" stroke-width="2" marker-end="url(#b)"/>
+        <line x1="652" y1="169" x2="686" y2="169" stroke="#7986CB" stroke-width="2" marker-end="url(#b)"/>
+      </svg>
+      <span class="cap">The guard was proved by feeding it a plausible, carefully hedged sentence that every other quality check passed. Removed when unsupported, kept when supported.</span>
+    </div>
+    <p style="margin-top:28px">Corrections are additive. Stale text is never deleted or quietly
+      reworded, so the record contains cases where a correction was itself wrong and had to be corrected
+      back. Evidence behind the assessment design is graded on a seven-point scale by how close each
+      source sits to Karachi students of this age, and every step away from that population is stated
+      rather than absorbed.</p>
+  </div>
+</section>
+
+<section id="log">
+  <div class="wrap">
+    <div class="eyebrow">Engineering log</div>
+    <h2>What broke, what it would have done to a student, and what fixed it</h2>
+    <p>Severity in this project is measured in wrong guidance to a student, not in code quality. This is
+      a selected record, newest first. Dates are real; nothing here is reconstructed.</p>
+
+    <div class="logtitle"><h3>Open</h3><span class="note">Known, recorded, not yet fixed</span></div>
+    <div class="log">
+      <div class="entry open"><div class="when">open</div><div>
+        <h3>The system does not know whether its advice is good</h3>
+        <p>There is no holistic review of counselling quality and no outcome data. Building it needs
+          labelled outcomes that do not exist yet.</p></div></div>
+      <div class="entry open"><div class="when">open</div><div>
+        <h3>Two thirds of completed work is believed rather than verified</h3>
+        <p>Finished items are tagged either live-exercised or reasoned-from-code. Of 55 completed items,
+          18 have been exercised against a live run. The remaining 37 are believed. The tagging exists
+          specifically so that suspicion stays pointed at the right set.</p></div></div>
+      <div class="entry open"><div class="when">open</div><div>
+        <h3>The conversation can borrow a student's biography</h3>
+        <p>When a student volunteers a rich personal history, the reply can retell it as though it were
+          the system's own experience. Four instances, all inside the one case that volunteered detail,
+          none in the other four. The existing guard misses it because it checks claims about the
+          student, and this is a false claim about the speaker.</p></div></div>
+      <div class="entry open"><div class="when">open</div><div>
+        <h3>A save can fail while the screen says it succeeded</h3>
+        <p>Result cards are sent to the screen before the record is written. If the write fails the
+          student sees their results, the error is swallowed, and the dashboard is empty on next launch.</p></div></div>
+      <div class="entry open"><div class="when">open</div><div>
+        <h3>Labour-market signal is collected but not connected</h3>
+        <p>The job-market pipeline runs and produces a per-field demand history. Nothing in the ranking
+          reads it yet.</p></div></div>
+    </div>
+
+    <div class="logtitle"><h3>Resolved</h3><span class="note">Newest first</span></div>
+    <div class="log">
+      <div class="entry"><div class="when">2026-07-25</div><div>
+        <h3>A fix introduced a defect, and the next gate caught it</h3>
+        <p>A change made three days earlier produced wrong guidance for one group of students.</p>
+        <div class="fix"><b>Fixed</b> in the same pass that found it. The neighbouring finding was
+          pre-existing rather than newly introduced, and was deliberately recorded and left rather than
+          bundled in.</div></div></div>
+
+      <div class="entry"><div class="when">2026-07-24</div><div>
+        <h3>A third of commerce students would have seen the same question twice</h3>
+        <p>The way one question bank was assembled meant roughly 32% of commerce students would have
+          been asked a duplicate.</p>
+        <div class="fix"><b>Symptom fixed, root cause recorded as open.</b> Deduplication makes the
+          student-facing behaviour safe. The log states plainly that the underlying bank is still wrong
+          and needs a decision, so the fix cannot be mistaken for a resolution.</div></div></div>
+
+      <div class="entry"><div class="when">2026-07-22</div><div>
+        <h3>Stored admission data disagreed with the prospectus</h3>
+        <p>Re-verifying one university against its published documents found a legal minimum stored as
+          50% where the source says 60%, an incomplete list of mandatory subjects, and fees that had
+          been entered as estimates.</p>
+        <div class="fix"><b>Corrected against the primary source.</b> What could not be verified was
+          recorded as a finding, including three documents with no extractable text.</div></div></div>
+
+      <div class="entry"><div class="when">2026-07-17</div><div>
+        <h3>A previous fix was proven harmful and reverted</h3>
+        <p>A change made the day before, intended to keep resumed answers in sync, was traced through
+          its consumers and shown to cause silent scoring corruption on submit.</p>
+        <div class="fix"><b>Reverted with evidence.</b> The useful half was kept and an honest
+          non-blocking warning shipped instead of the broken guarantee.</div></div></div>
+
+      <div class="entry"><div class="when">2026-07-16</div><div>
+        <h3>A cited study did not exist</h3>
+        <p>A scripted answer leaned on a large 2024 study that could not be found. It traced back to a
+          single non-peer-reviewed analysis from 2023.</p>
+        <div class="fix"><b>Corrected without deleting the error.</b> The wrong script remains in the
+          file, struck through and marked unusable, with a peer-reviewed replacement beneath it. Three
+          further citation defects were found in the same pass, including a source cited for adolescents
+          whose sample was adults.</div></div></div>
+
+      <div class="entry"><div class="when">2026-06-30</div><div>
+        <h3>An investigation reversed its own earlier finding</h3>
+        <p>An earlier pass concluded the reasoning over-asserted when data was thin. A later pass found
+          the opposite: the thinnest case is the most honest, because the component declines outright,
+          and over-assertion is triggered by conflicting data instead.</p>
+        <div class="fix"><b>Filed alongside the original, not over it.</b> Both findings remain in the
+          record with the correction dated.</div></div></div>
+
+      <div class="entry"><div class="when">2026-06-28</div><div>
+        <h3>The system's own record of what ran was false</h3>
+        <p>A live probe found a class of gates that executed on every turn regardless of their
+          condition, then wrote and persisted false ran-or-skipped entries. Reading the code would not
+          have found it. Only running it and comparing the record against reality did.</p>
+        <div class="fix"><b>Gates corrected and the telemetry made truthful.</b> The same pass found a
+          measured signal that never reached the explanation layer, so under conflicting data the
+          narrative could assert an identity the measurement contradicted.</div></div></div>
+
+      <div class="entry"><div class="when">2026-06-16</div><div>
+        <h3>209 passing tests missed five real defects</h3>
+        <p>An audit of the seam between app and service found a naming mismatch that both deflated merit
+          and triggered a wrong regulatory exclusion, and a scale mismatch that had left counselling
+          branches dead for every live student.</p>
+        <div class="fix"><b>Fixed, and the reason recorded.</b> Every fixture seeded the canonical values
+          the code expected and never the payload the live app actually sends. Tests written against the
+          author's own assumptions could not fail, so they proved nothing about the seam.</div></div></div>
+
+      <div class="entry"><div class="when">2026-05-15</div><div>
+        <h3>The job-market collector was silently discarding 42% of results</h3>
+        <p>It assumed 25 results per page. The source returns nine or ten, so it skipped every position
+          past the first ten of each page. No error, no warning, and a perfectly plausible dataset.</p>
+        <div class="fix"><b>Corrected the page stride</b>, which raised a full pull from 631 records to
+          1097, and applied the same fix to every pass in every script.</div></div></div>
+
+      <div class="entry"><div class="when">2026-04-28</div><div>
+        <h3>An automated pass had invented merit figures</h3>
+        <p>A prior data session had written merit history values that did not match any published
+          source.</p>
+        <div class="fix"><b>Replaced with authoritative figures</b> and the correction recorded against
+          the session that introduced it.</div></div></div>
+
+      <div class="entry"><div class="when">2026-04-24</div><div>
+        <h3>Every degree was scoring identically</h3>
+        <p>A pre-demo gate check found a knowledge file empty, which collapsed the match component of
+          every degree's score to the same constant.</p>
+        <div class="fix"><b>Recorded as a blocking condition rather than a pass.</b> The verdict was
+          amber with a named prerequisite, not green.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">The app</div>
+    <h2>What a student actually sees</h2>
+    <div class="shots">
+      <figure><img src="assets/shot-home.jpeg" alt="Home" loading="lazy" style="width:100%;height:auto;border-radius:16px;box-shadow:0 8px 24px rgba(61,90,254,.08);display:block">
+        <figcaption>Entry point, and where a returning student picks up.</figcaption></figure>
+      <figure><img src="assets/shot-build-profile.jpeg" alt="Build your profile" loading="lazy" style="width:100%;height:auto;border-radius:16px;box-shadow:0 8px 24px rgba(61,90,254,.08);display:block">
+        <figcaption>Stream, board, and personal constraints such as budget and travel.</figcaption></figure>
+      <figure><img src="assets/shot-grades.jpeg" alt="Grades" loading="lazy" style="width:100%;height:auto;border-radius:16px;box-shadow:0 8px 24px rgba(61,90,254,.08);display:block">
+        <figcaption>Marks entered per subject, with per-subject ceilings applied on entry.</figcaption></figure>
+      <figure><img src="assets/shot-riasec.jpeg" alt="Interest inventory" loading="lazy" style="width:100%;height:auto;border-radius:16px;box-shadow:0 8px 24px rgba(61,90,254,.08);display:block">
+        <figcaption>Sixty items establishing the interest profile that anchors matching.</figcaption></figure>
+      <figure><img src="assets/shot-assessment.jpeg" alt="Capability assessment" loading="lazy" style="width:100%;height:auto;border-radius:16px;box-shadow:0 8px 24px rgba(61,90,254,.08);display:block">
+        <figcaption>One of 265 items per session across seven instruments, English or Roman Urdu.</figcaption></figure>
+      <figure><img src="assets/shot-preferences.jpeg" alt="Preferences" loading="lazy" style="width:100%;height:auto;border-radius:16px;box-shadow:0 8px 24px rgba(61,90,254,.08);display:block">
+        <figcaption>Constraints that filter rather than rank: cost, location, institution type.</figcaption></figure>
+      <figure><img src="assets/shot-roadmap.jpeg" alt="Ranked roadmap" loading="lazy" style="width:100%;height:auto;border-radius:16px;box-shadow:0 8px 24px rgba(61,90,254,.08);display:block">
+        <figcaption>The ranked set. Capture one showing a degree with no published merit if you can.</figcaption></figure>
+      <figure><img src="assets/shot-chat.jpeg" alt="Counsellor conversation" loading="lazy" style="width:100%;height:auto;border-radius:16px;box-shadow:0 8px 24px rgba(61,90,254,.08);display:block">
+        <figcaption>The explanation layer, answering follow-ups in the student's own language.</figcaption></figure>
+      <figure><img src="assets/shot-my-profile.jpeg" alt="My profile" loading="lazy" style="width:100%;height:auto;border-radius:16px;box-shadow:0 8px 24px rgba(61,90,254,.08);display:block">
+        <figcaption>The stored profile a student returns to, and can revise.</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Evidence</div>
+    <h2>Stated at the strength it can be defended</h2>
+    <div class="ev">
+      <div class="row"><div class="v">60</div><div class="l">live conversation turns against the deployed
+        system, every reasoning step traced and every response stream captured as an artifact</div></div>
+      <div class="row"><div class="v">24 / 24</div><div class="l">reasoning steps visible in traces of the deployed
+        run, confirming every step of the graph executed in production rather than only in test</div></div>
+      <div class="row"><div class="v">592</div><div class="l">automated tests passing, zero failing. Every
+        correctness fix ships with a regression test that pins it</div></div>
+      <div class="row"><div class="v">8 / 20</div><div class="l">universities fully curated of a target
+        twenty, spanning 252 degree programmes, public and private, general and specialist</div></div>
+      <div class="row"><div class="v">5</div><div class="l">representative personas modelling the Karachi
+        student distribution, evaluated across 50 turns in realistic sessions. Not recruited humans. A
+        study with real students is in progress and will supersede them</div></div>
+      <div class="row"><div class="v">27</div><div class="l">peer-reviewed sources behind the assessment
+        design, including cross-cultural validation work and Pakistan-specific research on family
+        influence in career choice</div></div>
+    </div>
+    <p style="margin-top:24px;font-size:15.5px">The evaluation is five rather than more for a reason
+      worth stating: at a measured 10.6 model calls per turn against a daily quota, roughly 42 turns per
+      day were possible. Depth was chosen over breadth deliberately.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Limitations</div>
+    <h2>What the evidence does not cover</h2>
+
+    <div class="lim"><h3>The interest model has been tested on Pakistani students twice, and both studies found it does not hold</h3>
+      <p>Two independent structural studies, roughly a thousand students between them, found the
+        circular ordering of the underlying interest model does not fit this population. The instrument's
+        psychometrics were sound and interest-to-aspiration correspondence held for several careers, but
+        the geometry did not. The weighting was deliberately not changed, because the limitation is an
+        absence of local structural validation rather than a weak signal, and down-weighting the
+        best-validated input in favour of less-validated ones would make the system less defensible. It
+        is disclosed instead, and the robustness comes from architecture: no recommendation rests on that
+        geometry alone.</p></div>
+
+    <div class="lim"><h3>The instruments are construct-grounded, not instrument-validated</h3>
+      <p>Original items built on established frameworks. First-party reliability on a Karachi sample is
+        not established and will be computed as data accrues. Support is not uniform across them, and the
+        weakest is named as such rather than averaged into the rest.</p></div>
+
+    <div class="lim"><h3>Prestige and regional demand are encoded from market knowledge, not surveyed</h3>
+      <p>The system models how families in Karachi actually weigh degree status, because a recommendation
+        that ignores it will be rejected regardless of fit. Those values were assigned from general market
+        knowledge and have not been validated by a survey.</p></div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">The repository</div>
+    <h2>Why there is no code here</h2>
+    <p>The source, the curated admission data, and the derived eligibility rules are private. The
+      curation is the work: months of reconciling regulations, prospectuses, and published merit lists
+      into something a system can reason over correctly.</p>
+    <p>Everything on this page is reasoning rather than mechanism. I am glad to walk through the
+      architecture in a conversation.</p>
+    <nav class="links" style="margin-top:26px">
+      <a class="primary" href="https://fyp-career-guidance.vercel.app/" style="background:var(--indigo);color:#fff">Open the live app</a>
+      <a href="mailto:ma.sharif.waqas@gmail.com" style="background:#E4E9FF;color:var(--indigo)">Get in touch</a>
+    </nav>
+    <p style="margin-top:18px;font-size:15.5px">Or write to
+      <a href="mailto:ma.sharif.waqas@gmail.com">ma.sharif.waqas@gmail.com</a>.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="who">Muhammad Waqas Sharif</div>
+    <p style="margin-bottom:14px">
+      <a href="mailto:ma.sharif.waqas@gmail.com">ma.sharif.waqas@gmail.com</a>
+      &nbsp;·&nbsp;
+      <a href="https://www.linkedin.com/in/ma-waqas-sharif/">linkedin.com/in/ma-waqas-sharif</a>
+      &nbsp;·&nbsp;
+      <a href="https://github.com/Waqas01CP">github.com/Waqas01CP</a>
+    </p>
+    <p>Primary author and lead developer: architecture, backend, the reasoning and eligibility engine,
+      and the data pipeline. Built with Muhammad Khuzaim Sajjad (design) and Fazal ur Rehman Khan (data).</p>
+    <p style="margin-top:14px">Python and FastAPI, LangGraph for orchestration, PostgreSQL, Flutter for a
+      single Android and web codebase, and Claude models for the conversational layer. No vector search
+      and no machine-learned ranking: there is no dataset of Pakistani student outcomes to train on, and
+      a recommendation a student cannot challenge would defeat the purpose.</p>
+    <div class="fine">© 2026 Muhammad Waqas Sharif. All rights reserved. No licence is granted for any use of this work.</div>
+  </div>
+</footer>
+
+<div class="toast" id="copied" hidden role="status" aria-live="polite"></div>
+
+<script>
+(function () {
+  var toast = document.getElementById('copied');
+  function say(msg) {
+    if (!toast) return;
+    toast.textContent = msg;
+    toast.hidden = false;
+    clearTimeout(toast._t);
+    toast._t = setTimeout(function () { toast.hidden = true; }, 3200);
+  }
+  document.querySelectorAll('a[href^="mailto:"]').forEach(function (a) {
+    a.addEventListener('click', function () {
+      var addr = a.getAttribute('href').replace('mailto:', '').split('?')[0];
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(addr).then(
+          function () { say(addr + ' copied to clipboard'); },
+          function () { say(addr); }
+        );
+      } else {
+        say(addr);
+      }
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
