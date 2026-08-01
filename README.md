@@ -126,15 +126,13 @@ flowchart LR
   X --> O
 ```
 
-The guard was proved rather than assumed: it was fed a plausible, carefully hedged sentence that passed every other quality criterion, and confirmed to remove it when unsupported and keep it when supported.
+Enforcement moved out of the prompt and into code that runs after the model has written. How that guard was proved to be the component actually doing the work is below.
 
 ## How correctness is defended
 
 This is the part of the project I would want a reviewer to look at.
 
 **A check that cannot fail is worse than no check.** A guard that never fires is indistinguishable from a guard that does not exist, and worse, because you now trust something that is not working. So guards are tested against the case designed to defeat them. One deterministic gate, which strips claims the system has no measurement to support, was validated by feeding it a plausible, carefully hedged sentence that every other quality check passed. It was stripped when unsupported and preserved when supported. That is a controlled experiment proving which component is doing the work.
-
-**Enforce honesty deterministically, after generation.** Instructing a model not to do something proved unreliable across three separate live incidents. Rules of the form "never assert what was not measured" are now enforced in code after the model has spoken, not requested in a prompt beforehand.
 
 **Documentation is generated from source and refuses to guess.** The internal architecture reference is built by reading the running system rather than by transcription. Where the source records nothing, it prints a refusal rather than a plausible sentence. It also displays its own age, because an earlier version once presented a confidently current picture while sitting 151 commits behind. The fix was structural: a check that only runs at build time cannot fire once the artifact exists.
 
@@ -196,7 +194,7 @@ Severity in this project is measured in wrong guidance to a student, not in code
 
 Stated at the strength it can actually be defended, as of July 2026.
 
-- **Deployed and validated end to end.** 60 live conversation turns against the production deployment, with every reasoning step traced and the full response stream of every turn captured as an artifact. Longest turn 106.3 seconds, held past the infrastructure timeout.
+- **Deployed and validated end to end.** 60 live conversation turns against the production deployment, with every reasoning step traced and the full response stream of every turn captured as an artifact. Every step of the graph was confirmed to have executed in production rather than only in test.
 - **592 automated tests, zero failures.** Every correctness fix ships with a regression test that pins it.
 - **Evaluated across five representative personas over 50 turns.** These are personas modelling the distribution of Karachi students, evaluated in realistic multi-turn sessions. They are not recruited human participants. A study with real students is in progress and will supersede this. The reason it is five and not more is recorded: at a measured 10.6 model calls per turn against a daily quota, roughly 42 turns per day were possible, so depth was chosen over breadth deliberately.
 - **8 universities fully curated of a target 20, spanning 252 degree programmes.** Public and private, general and specialist, chosen to close single-provider gaps rather than to maximise the count.
