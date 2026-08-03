@@ -18,16 +18,15 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  /* pulled from FRONTEND_DESIGN_SYSTEM_V2 */
-  --indigo:#3D5AFE;        /* primary, human actions */
+  --indigo:#3D5AFE;        /* primary */
   --indigo-lo:#536DFE;     /* gradient partner */
   --indigo-soft:#7986CB;   /* secondary text, metadata */
   --indigo-pale:#BBCCFF;   /* on-indigo secondary text */
-  --violet:#7C4DFF;        /* AI CONTENT ONLY */
+  --violet:#7C4DFF;
   --violet-bg:#EDE7F6;
   --violet-label:#6200EA;
   --violet-body:#1A0050;
-  --bg:#F8F9FF;            /* 60% surface */
+  --bg:#F8F9FF;
   --surface:#FFFFFF;
   --ink:#141A3D;
   --body:#4A5478;
@@ -51,7 +50,7 @@ h1,h2,h3{font-weight:700;letter-spacing:-.021em;line-height:1.14}
 .mono{font-family:"IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums}
 .eyebrow{font-size:11.5px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--indigo)}
 
-/* hero mirrors the app splash */
+/* hero mirrors the app splash screen */
 header{background:var(--indigo);color:#fff;padding:74px 0 0;position:relative}
 header::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:linear-gradient(90deg,var(--indigo),var(--indigo-lo))}
 .mark{font-size:12.5px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--indigo-pale)}
@@ -64,7 +63,7 @@ h1{font-size:clamp(36px,5.8vw,62px);font-weight:800;margin:20px 0 0;letter-spaci
 .links a.primary{background:#fff;color:var(--indigo)}
 .links a.primary:hover{background:#EEF1FF}
 
-/* signature: the merit sheet */
+/* the merit sheet */
 .sheet{margin-top:52px;background:var(--surface);color:var(--ink);border-radius:var(--r-form) var(--r-form) 0 0;padding:28px 28px 32px;box-shadow:var(--shadow-form);overflow-x:auto}
 .cap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:18px;font-size:11.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--indigo-soft)}
 table{width:100%;border-collapse:collapse;font-size:14.5px;min-width:560px}
@@ -107,8 +106,6 @@ p strong{color:var(--ink);font-weight:600}
 @media(max-width:560px){.shots{grid-template-columns:1fr}}
 @media(min-width:760px){.shots{grid-template-columns:repeat(3,1fr);gap:26px}}
 figure{margin:0}
-.ph{aspect-ratio:9/17;background:var(--surface);border-radius:var(--r-card);box-shadow:var(--shadow-card);display:flex;align-items:center;justify-content:center;text-align:center;padding:20px;font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--indigo-soft);line-height:1.6}
-img.ph{display:block;width:100%;height:auto;aspect-ratio:9/17;object-fit:cover;object-position:top;padding:0}
 figcaption{font-size:14px;color:var(--body);margin-top:11px}
 
 /* engineering log */
@@ -131,7 +128,7 @@ figcaption{font-size:14px;color:var(--body);margin-top:11px}
 .lim h3{font-size:17px;margin-bottom:7px}
 .lim p{font-size:15.5px;margin:0}
 
-/* AI-content panel: violet is reserved for this and nothing else */
+/* panel marking model-generated content */
 .ai{background:var(--violet-bg);border-left:3px solid var(--violet);border-radius:0 12px 12px 0;padding:18px 20px;margin-top:26px}
 .ai .l{font-size:10.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--violet-label);margin-bottom:6px}
 .ai p{font-size:14.5px;color:var(--violet-body);margin:0}
@@ -286,7 +283,7 @@ header .sheet{animation:rise .7s .50s both}
           <path d="M0 0 L10 5 L0 10 z" fill="#7986CB"/></marker></defs>
         <rect x="8" y="118" width="132" height="62" rx="12" fill="#E4E9FF"/>
         <text x="74" y="145" text-anchor="middle" font-size="14" font-weight="600" fill="#3D5AFE">Student</text>
-        <text x="74" y="164" text-anchor="middle" font-size="12" fill="#4A5478">marks, subjects,</text>
+        <text x="74" y="164" text-anchor="middle" font-size="12" fill="#4A5478">marks and subjects</text>
         <rect x="196" y="40" width="330" height="218" rx="16" fill="#F8F9FF" stroke="#D7DDFB"/>
         <text x="212" y="66" font-size="11" font-weight="700" letter-spacing="1.4" fill="#3D5AFE">DETERMINISTIC ENGINE</text>
         <rect x="212" y="80" width="298" height="42" rx="10" fill="#FFFFFF" stroke="#E2E7FC"/>
@@ -421,11 +418,6 @@ header .sheet{animation:rise .7s .50s both}
         <p>Any change that is not meant to alter what students see is verified to produce identical
           output for existing profiles. Improvements are additive by default, and a restructure has to
           be argued for rather than assumed.</p></div>
-      <div class="cell"><h3>Parallel fan-out and fan-in</h3>
-        <p>The pipeline was originally sequential and took 20 to 25 seconds before a student saw
-          anything. Independent work was separated to run concurrently and several steps were split
-          into finer sub-steps, so less of the work sat on the critical path. First response now
-          arrives in 3.7 seconds, with the rest streaming in behind it.</p></div>
       <div class="cell"><h3>Bilingual by design, not by translation</h3>
         <p>All seven instruments and the full 265-item session exist in both English and Roman Urdu,
           the register students actually write in. The conversation follows whichever the student uses,
@@ -676,7 +668,7 @@ header .sheet{animation:rise .7s .50s both}
       <figure><img src="assets/shot-preferences.jpeg" alt="Preferences" loading="lazy" class="shot">
         <figcaption>Constraints that filter rather than rank: cost, location, institution type.</figcaption></figure>
       <figure><img src="assets/shot-roadmap.jpeg" alt="Ranked roadmap" loading="lazy" class="shot">
-        <figcaption>The ranked set. Capture one showing a degree with no published merit if you can.</figcaption></figure>
+        <figcaption>The ranked set, with each degree's eligibility and honest standing.</figcaption></figure>
       <figure><img src="assets/shot-chat.jpeg" alt="Counsellor conversation" loading="lazy" class="shot">
         <figcaption>The explanation layer, answering follow-ups in the student's own language.</figcaption></figure>
       <figure><img src="assets/shot-my-profile.jpeg" alt="My profile" loading="lazy" class="shot">
