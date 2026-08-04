@@ -222,7 +222,7 @@ Python and FastAPI, LangGraph for orchestration, PostgreSQL, Flutter for a singl
 
 ## Team
 
-Muhammad Waqas Sharif, primary author and lead developer: architecture, backend, the reasoning and eligibility engine, and the data pipeline. With Muhammad Khuzaim Sajjad (design) and Fazal ur Rehman Khan (data).
+Muhammad Waqas Sharif, primary author and lead developer: architecture, backend, the reasoning and eligibility engine, and the data pipeline. With Muhammad Khuzaim Sajjad (design and frontend) and Fazal ur Rehman Khan (data).
 
 ---
 
