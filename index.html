@@ -260,10 +260,15 @@ header .sheet{animation:rise .7s .50s both}
     <h2>The four things worth knowing first</h2>
     <div class="hl">
       <div><div class="b">20-25s to 3.7s</div><div class="k">First-response latency, cut by re-architecting a sequential pipeline into parallel fan-out and fan-in stages.</div></div>
-      <div><div class="b">26 steps that cannot deadlock</div><div class="k">Every step runs on every turn with no conditional edges, so the graph cannot stall on an unmet dependency.</div></div>
+      <div><div class="b">24 steps that cannot deadlock</div><div class="k">Every step runs on every turn with no conditional edges, so the graph cannot stall on an unmet dependency.</div></div>
       <div><div class="b">Honesty enforced in code</div><div class="k">Unsupported claims are removed after the model writes, rather than forbidden in the prompt, which was tried and failed.</div></div>
       <div><div class="b">Deployed and validated live</div><div class="k">60 conversation turns against production with every step traced, and 592 automated tests with none failing.</div></div>
     </div>
+
+    <div class="fig">
+      <img src="assets/graph.svg" alt="The compiled graph: nine nodes run in parallel from start, converge on dispatch, narrow through a scoring chain, then fan in six ways to the response layer." style="width:100%;height:auto;display:block">
+    </div>
+    <div class="cap"><b>Every node executes on every turn.</b> There are no conditional edges. DispatchNode's <code style="font-family:'IBM Plex Mono',monospace;font-size:.92em">node_activation</code> makes the irrelevant nodes no-op at their activation check, so every fan-in is always satisfied and the graph cannot deadlock. Activation control lives in a node, not in the topology. Edges into a fan-in are drawn heavier; layer numbers are the graph's own. Twenty-four registered nodes, which the renderer draws as twenty-six by including its own start and end markers.</div>
   </div>
 </section>
 
@@ -762,8 +767,8 @@ header .sheet{animation:rise .7s .50s both}
     <p>The source, the curated admission data, and the derived eligibility rules are private. The
       curation is the work: months of reconciling regulations, prospectuses, and published merit lists
       into something a system can reason over correctly.</p>
-    <p>Everything on this page is reasoning rather than mechanism. I am glad to walk through the
-      architecture in a conversation.</p>
+    <p>Everything on this page is reasoning rather than mechanism, apart from the architecture above,
+      which is shown because the shape is not the moat. I am glad to walk through it in a conversation.</p>
     <nav class="links" style="margin-top:26px">
       <a class="primary" href="https://fyp-career-guidance.vercel.app/" style="background:var(--indigo);color:#fff">Open the live app</a>
       <a href="mailto:ma.sharif.waqas@gmail.com" style="background:#E4E9FF;color:var(--indigo)">Get in touch</a>

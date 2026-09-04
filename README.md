@@ -11,7 +11,7 @@
 ## Highlights
 
 - **First-response latency cut from 20-25 seconds to 3.7 seconds** by re-architecting a sequential pipeline into parallel fan-out and fan-in stages.
-- **A 26-step reasoning graph that cannot deadlock**, because every step runs on every turn and there are no conditional edges.
+- **A 24-step reasoning graph that cannot deadlock**, because every step runs on every turn and there are no conditional edges. Two further background tasks run after the response has streamed, outside the graph.
 - **Honesty enforced in code after generation**, not requested in the prompt, which was tried and failed three times.
 - **Deployed and validated live**: 60 conversation turns against production with every step traced, and 592 automated tests with none failing.
 
@@ -154,6 +154,12 @@ This is the part of the project I would want a reviewer to look at.
 
 ---
 
+## The compiled graph
+
+![The compiled graph: nine nodes run in parallel from start, converge on dispatch, narrow through a scoring chain, then fan in six ways to the response layer.](assets/graph.svg)
+
+**Every node executes on every turn.** There are no conditional edges. DispatchNode's `node_activation` makes the irrelevant nodes no-op at their activation check, so every fan-in is always satisfied and the graph cannot deadlock. Activation control lives in a node, not in the topology. Edges into a fan-in are drawn heavier; layer numbers are the graph's own. Twenty-four registered nodes, which the renderer draws as twenty-six by including its own start and end markers.
+
 ## Engineering log
 
 Severity in this project is measured in wrong guidance to a student, not in code quality. Selected record, newest first. Dates are real. Nothing here is reconstructed.
@@ -212,7 +218,7 @@ Everything currently known to be wrong or unfinished is in the engineering log a
 
 The source, the curated admission data, and the derived eligibility rules are private. The curation is the work: months of convergent research reconciling regulations, prospectuses, and published merit lists into something a system can reason over correctly.
 
-Everything above is the reasoning, not the mechanism. I am glad to walk through the architecture in a conversation.
+The architecture is shown above, because the shape is not the moat. What is reasoning rather than mechanism is everything else on this page. I am glad to walk through the architecture in a conversation.
 
 ---
 
