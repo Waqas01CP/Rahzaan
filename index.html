@@ -199,7 +199,7 @@ header .sheet{animation:rise .7s .50s both}
   "@context": "https://schema.org",
   "@type": "TechArticle",
   "headline": "Rahzaan: engineering an academic career-guidance system that says when it does not know",
-  "description": "Case study of a deployed multi-agent career-guidance system for Karachi secondary-school students, where eligibility and ranking are computed in deterministic code and the language model only explains decisions it did not make.",
+  "description": "Case study of a deployed agentic career-guidance system for Karachi secondary-school students, where eligibility and ranking are computed in deterministic code and the language model only explains decisions it did not make.",
   "url": "https://waqas01cp.github.io/Rahzaan/",
   "image": "https://waqas01cp.github.io/Rahzaan/assets/og-card.png",
   "inLanguage": "en",
@@ -214,7 +214,7 @@ header .sheet{animation:rise .7s .50s both}
       "https://www.linkedin.com/in/ma-waqas-sharif/"
     ]
   },
-  "about": ["Agentic AI", "Multi-agent systems", "Career guidance", "LLM reliability"]
+  "about": ["Agentic AI", "Career guidance", "LLM reliability"]
 }
 </script>
 </head>
@@ -401,7 +401,7 @@ header .sheet{animation:rise .7s .50s both}
     <p>The reasoning engine is a directed graph of independent steps rather than a sequence of prompts.
       Steps that do not depend on each other execute concurrently, so the work that can overlap does.</p>
     <div class="scale">
-      <div><div class="n">26</div><div class="k">reasoning steps: 24 inside the graph, 2 running after the response has streamed</div></div>
+      <div><div class="n">24</div><div class="k">reasoning steps inside the graph, plus 2 that run after the response has streamed</div></div>
       <div><div class="n">52</div><div class="k">fields in the typed state object threaded through every step</div></div>
       <div><div class="n">22</div><div class="k">API endpoints over 6 database tables</div></div>
       <div><div class="n">29</div><div class="k">routes in the app, across a single Android and web codebase</div></div>
@@ -791,7 +791,8 @@ header .sheet{animation:rise .7s .50s both}
     <p>Primary author and lead developer: architecture, backend, the reasoning and eligibility engine,
       and the data pipeline. Built with Muhammad Khuzaim Sajjad (design and frontend) and Fazal ur Rehman Khan (data).</p>
     <p style="margin-top:14px">Python and FastAPI, LangGraph for orchestration, PostgreSQL, Flutter for a
-      single Android and web codebase, and Claude models for the conversational layer. No vector search
+      single Android and web codebase, and a conversational layer whose model is set per step through
+      environment config. No vector search
       and no machine-learned ranking: there is no dataset of Pakistani student outcomes to train on, and
       a recommendation a student cannot challenge would defeat the purpose.</p>
     <div class="fine">© 2026 Muhammad Waqas Sharif. All rights reserved. No licence is granted for any use of this work.</div>

@@ -84,7 +84,7 @@ The model sits downstream of every decision. There is no path by which it can ch
 
 | | |
 |---|---|
-| **26** reasoning steps | 24 inside the graph, 2 running after the response has streamed |
+| **24** reasoning steps | inside the graph, plus 2 that run after the response has streamed |
 | **52** fields | in the typed state object threaded through every step |
 | **22** API endpoints | over 6 database tables |
 | **29** routes | in the app, across a single Android and web codebase |
@@ -224,7 +224,7 @@ The architecture is shown above, because the shape is not the moat. What is reas
 
 ## Built with
 
-Python and FastAPI, LangGraph for orchestration, PostgreSQL, Flutter for a single Android and web codebase, and Claude models for the conversational layer. No vector search and no machine-learned ranking: there is no dataset of Pakistani student outcomes to train on, and a black-box recommendation a student cannot challenge would defeat the purpose.
+Python and FastAPI, LangGraph for orchestration, PostgreSQL, Flutter for a single Android and web codebase, and a conversational layer whose model is set per step through environment config. No vector search and no machine-learned ranking: there is no dataset of Pakistani student outcomes to train on, and a black-box recommendation a student cannot challenge would defeat the purpose.
 
 ## Team
 
